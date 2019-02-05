@@ -1,6 +1,7 @@
 package main.com.stormlin;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Task implements Serializable {
 
@@ -9,11 +10,13 @@ public class Task implements Serializable {
     private String id;
     private String title;
     private String priority;
+    private Date date;
 
     Task(String title, String priority) {
-        this.id = Util.get8BitIdFromString(title);
+        id = Util.get8BitIdFromString(title);
         this.title = title;
         this.priority = priority;
+        date = new Date();
     }
 
     public String getId() {
@@ -36,4 +39,11 @@ public class Task implements Serializable {
         this.priority = priority;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

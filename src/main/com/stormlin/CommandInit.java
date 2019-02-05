@@ -1,8 +1,6 @@
 package main.com.stormlin;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
 
 public class CommandInit implements ICommand {
 
@@ -13,7 +11,8 @@ public class CommandInit implements ICommand {
     public void execute(String[] args) {
         // This command takes no argument.
         if (args.length > 1) {
-            this.usage();
+            System.out.println("Too many arguments for command: init");
+            usage();
             return;
         }
         try {
@@ -31,7 +30,7 @@ public class CommandInit implements ICommand {
             // Create the list file
             File list = new File(Const.DEFAULT_FILE_PATH);
             if (list.exists()) {
-                System.out.println("Unable to create the list in this folder!");
+                System.out.println("List file exists!");
                 return;
             }
             if (!list.createNewFile()) {
@@ -39,11 +38,10 @@ public class CommandInit implements ICommand {
                 return;
             }
 
-            // Create an empty list object
+            // Create an empty list
             TodoList todoList = new TodoList();
-            ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(Const.DEFAULT_FILE_PATH));
-            stream.writeObject(todoList);
-            stream.close();
+            // Serialize this list to file
+            Util.saveToListFile(todoList);
             System.out.println("Successfully initialized an empty list in folder: .todo");
         } catch (Exception e) {
             System.out.println("Unable to create the list in this folder!");

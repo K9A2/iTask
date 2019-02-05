@@ -1,7 +1,6 @@
 package main.com.stormlin;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,11 +29,23 @@ class Util {
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(listPath));
             list = (TodoList) inputStream.readObject();
+            inputStream.close();
             return list;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    static void saveToListFile(TodoList list) {
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.DEFAULT_FILE_PATH));
+            outputStream.writeObject(list);
+            outputStream.close();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+            System.out.println("Unable to save the changes!");
+        }
     }
 
 }

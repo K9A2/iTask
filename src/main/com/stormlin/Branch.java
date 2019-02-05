@@ -1,7 +1,7 @@
 package main.com.stormlin;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Branch implements Serializable {
 
@@ -9,13 +9,13 @@ public class Branch implements Serializable {
 
     private String id;
     private String name;
-    private ArrayList<Task> tasks;
+    private HashMap<String, Task> tasks;
 
     public String getId() {
         return id;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
@@ -24,22 +24,31 @@ public class Branch implements Serializable {
     }
 
     Branch(String name) {
-        this.id = Util.get8BitIdFromString(name);
+        id = Util.get8BitIdFromString(name);
         this.name = name;
-        this.tasks = new ArrayList<>();
+        tasks = new HashMap<>();
     }
 
-    public void addTask(String title, String priority) {
-        String id = Util.get8BitIdFromString(title);
-        if (!this.tasks.contains(id)) {
-            tasks.add(new Task(title, priority));
+    HashMap<String, Task> getTaskList() {
+        return tasks;
+    }
+
+    void addTask(String title, String priority) {
+        String key = Util.get8BitIdFromString(title);
+        if (!tasks.containsKey(key)) {
+            tasks.put(key, new Task(title, priority));
+            System.out.println(String.format("Task: %s added successfully!", key));
         } else {
-            System.out.println("Task with identical title exists!");
+            System.out.println(String.format("Task: %s title exists!", title));
         }
     }
 
     public void removeTask(String id) {
-        this.tasks.remove(id);
+        if (!tasks.containsKey(id)) {
+            System.out.println(String.format("Task: %s does not exists!", id));
+            return;
+        }
+        tasks.remove(id);
+        System.out.println(String.format("Task: %s removed successfully!", id));
     }
-
 }

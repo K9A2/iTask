@@ -18,6 +18,14 @@ public class Program {
                 CommandInit init = new CommandInit();
                 init.execute(args);
                 break;
+            case "status":
+                CommandStatus status = new CommandStatus();
+                status.execute(args);
+                break;
+            case "add":
+                CommandAdd add = new CommandAdd();
+                add.execute(args);
+                break;
             default:
                 System.out.println("Wrong command.");
                 usage();
