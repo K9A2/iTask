@@ -26,6 +26,10 @@ public class Program {
                 CommandAdd add = new CommandAdd();
                 add.execute(args);
                 break;
+            case "remove":
+                CommandRemove remove = new CommandRemove();
+                remove.execute(args);
+                break;
             default:
                 System.out.println("Wrong command.");
                 usage();
