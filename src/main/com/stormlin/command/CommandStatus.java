@@ -1,4 +1,9 @@
-package main.com.stormlin;
+package main.com.stormlin.command;
+
+import main.com.stormlin.entity.Task;
+import main.com.stormlin.entity.TodoList;
+import main.com.stormlin.util.Const;
+import main.com.stormlin.util.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +26,10 @@ public class CommandStatus implements ICommand {
         TodoList todoList = Util.readFromListFile(Const.DEFAULT_FILE_PATH);
         if (todoList == null) {
             System.out.println("Unable to load this file");
+            return;
+        }
+        if (todoList.getAllBranches().size() == 0) {
+            System.out.println("There is no branch yet.");
             return;
         }
         System.out.println(String.format("On branch: %s", todoList.getCurrentBranch().getName()));

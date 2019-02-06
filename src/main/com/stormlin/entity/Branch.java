@@ -1,4 +1,6 @@
-package main.com.stormlin;
+package main.com.stormlin.entity;
+
+import main.com.stormlin.util.Util;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -15,7 +17,7 @@ public class Branch implements Serializable {
         return id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
@@ -23,17 +25,17 @@ public class Branch implements Serializable {
         this.name = name;
     }
 
-    Branch(String name) {
+    public Branch(String name) {
         id = Util.get8BitIdFromString(name);
         this.name = name;
         tasks = new HashMap<>();
     }
 
-    HashMap<String, Task> getTaskList() {
+    public HashMap<String, Task> getTaskList() {
         return tasks;
     }
 
-    void addTask(String title, String priority) {
+   public void addTask(String title, String priority) {
         String key = Util.get8BitIdFromString(title);
         if (!tasks.containsKey(key)) {
             tasks.put(key, new Task(title, priority));

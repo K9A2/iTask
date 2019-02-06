@@ -1,5 +1,7 @@
 package main.com.stormlin;
 
+import main.com.stormlin.command.*;
+
 public class Program {
 
     private static void usage() {
@@ -29,6 +31,10 @@ public class Program {
             case "remove":
                 CommandRemove remove = new CommandRemove();
                 remove.execute(args);
+                break;
+            case "branch":
+                CommandBranch branch = new CommandBranch();
+                branch.execute(args);
                 break;
             default:
                 System.out.println("Wrong command.");

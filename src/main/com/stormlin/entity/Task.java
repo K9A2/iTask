@@ -1,4 +1,6 @@
-package main.com.stormlin;
+package main.com.stormlin.entity;
+
+import main.com.stormlin.util.Util;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package main.com.stormlin;
+package main.com.stormlin.util;
 
 public class Const {
 

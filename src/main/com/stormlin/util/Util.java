@@ -1,13 +1,15 @@
-package main.com.stormlin;
+package main.com.stormlin.util;
+
+import main.com.stormlin.entity.TodoList;
 
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-class Util {
+public class Util {
 
-    static String get8BitIdFromString(String string) {
+    public static String get8BitIdFromString(String string) {
         MessageDigest generator;
         try {
             generator = MessageDigest.getInstance("MD5");
@@ -24,7 +26,7 @@ class Util {
         return hashText.substring(0, 8);
     }
 
-    static TodoList readFromListFile(String listPath) {
+    public static TodoList readFromListFile(String listPath) {
         TodoList list;
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(listPath));
@@ -37,7 +39,7 @@ class Util {
         return null;
     }
 
-    static void saveToListFile(TodoList list) {
+    public static void saveToListFile(TodoList list) {
         try {
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(Const.DEFAULT_FILE_PATH));
             outputStream.writeObject(list);
