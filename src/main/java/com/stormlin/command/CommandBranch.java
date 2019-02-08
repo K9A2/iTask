@@ -1,9 +1,9 @@
-package main.com.stormlin.command;
+package com.stormlin.command;
 
-import main.com.stormlin.entity.Branch;
-import main.com.stormlin.entity.TodoList;
-import main.com.stormlin.util.Const;
-import main.com.stormlin.util.Util;
+import com.stormlin.entity.Branch;
+import com.stormlin.entity.TodoList;
+import com.stormlin.util.Const;
+import com.stormlin.util.Util;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -34,17 +34,17 @@ public class CommandBranch implements ICommand {
         }
 
         switch (args[1]) {
-            case "add":
-                addBranch(todoList, args);
-                break;
-            case "switch":
-                switchBranch(todoList, args);
-                break;
-            case "remove":
-                removeBranch(todoList, args);
-                break;
-            default:
-                break;
+        case "add":
+            addBranch(todoList, args);
+            break;
+        case "switch":
+            switchBranch(todoList, args);
+            break;
+        case "remove":
+            removeBranch(todoList, args);
+            break;
+        default:
+            break;
         }
 
     }
@@ -52,16 +52,16 @@ public class CommandBranch implements ICommand {
     private void addBranch(TodoList todoList, String[] args) {
         String key = Util.get8BitIdFromString(args[2]);
         if (todoList.getAllBranches().containsKey(key)) {
-            System.out.println(String.format("Branch: %s (%s) already exists!",
-                    todoList.getAllBranches().get(key).getName(), key));
+            System.out.println(
+                    String.format("Branch %s (%s) already exists!", key, todoList.getAllBranches().get(key).getName()));
             return;
         }
         Branch newBranch = new Branch(args[2]);
         todoList.getAllBranches().put(key, newBranch);
-        System.out.println(String.format("Branch: %s (%s) added successfully!", newBranch.getName(), newBranch.getId()));
+        System.out.println(String.format("Branch %s (%s) added successfully!", newBranch.getId(), newBranch.getName()));
         if (todoList.getAllBranches().size() == 1) {
             todoList.setCurrentBranch(key);
-            System.out.println(String.format("Branch %s is set to the current branch.", key));
+            System.out.println(String.format("Branch %s (%s) is set to the current branch.", key, newBranch.getName()));
         }
         Util.saveToListFile(todoList);
     }
@@ -109,6 +109,7 @@ public class CommandBranch implements ICommand {
             return;
         }
 
+        System.out.println("All branches are listed as below (current branch is marked by star):");
         String currentBranchId = todoList.getCurrentBranch().getId();
         // Print current branch at the first line
         System.out.println(String.format("* %s %s", branches.get(currentBranchId).getId(),

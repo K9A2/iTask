@@ -1,6 +1,6 @@
-package main.com.stormlin.util;
+package com.stormlin.util;
 
-import main.com.stormlin.entity.TodoList;
+import com.stormlin.entity.TodoList;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -23,7 +23,7 @@ public class Util {
         while (hashText.length() < 32) {
             hashText.insert(0, "0");
         }
-        return hashText.substring(0, 8);
+        return hashText.substring(0, 8).toUpperCase();
     }
 
     public static TodoList readFromListFile(String listPath) {

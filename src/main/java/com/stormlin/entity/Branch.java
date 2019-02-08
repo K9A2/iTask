@@ -1,6 +1,6 @@
-package main.com.stormlin.entity;
+package com.stormlin.entity;
 
-import main.com.stormlin.util.Util;
+import com.stormlin.util.Util;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -35,13 +35,13 @@ public class Branch implements Serializable {
         return tasks;
     }
 
-   public void addTask(String title, String priority) {
+    public void addTask(String title, String priority) {
         String key = Util.get8BitIdFromString(title);
         if (!tasks.containsKey(key)) {
             tasks.put(key, new Task(title, priority));
-            System.out.println(String.format("Task: %s added successfully!", key));
+            System.out.println(String.format("Task: %s (%s) added successfully!", key, title));
         } else {
-            System.out.println(String.format("Task: %s title exists!", title));
+            System.out.println(String.format("Task: %s (%s) exists!", key, title));
         }
     }
 

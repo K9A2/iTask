@@ -1,4 +1,5 @@
 out/
-.idea/
-*.iml
 .todo/
+.settings/
+.vscode/
+target/

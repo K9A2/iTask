@@ -1,9 +1,9 @@
-package main.com.stormlin.command;
+package com.stormlin.command;
 
-import main.com.stormlin.entity.Task;
-import main.com.stormlin.entity.TodoList;
-import main.com.stormlin.util.Const;
-import main.com.stormlin.util.Util;
+import com.stormlin.entity.Task;
+import com.stormlin.entity.TodoList;
+import com.stormlin.util.Const;
+import com.stormlin.util.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,6 +37,7 @@ public class CommandStatus implements ICommand {
 
         HashMap<String, Task> taskMap = todoList.getCurrentBranch().getTaskList();
         ArrayList<String> todoKeyList = new ArrayList<>(taskMap.keySet());
+        // Sort tasks by date ascending.
         todoKeyList.sort(Comparator.naturalOrder());
         Iterator<String> iterator = todoKeyList.iterator();
 
@@ -47,18 +48,23 @@ public class CommandStatus implements ICommand {
         while (iterator.hasNext()) {
             String key = iterator.next();
             switch (taskMap.get(key).getPriority()) {
-                case "high":
-                    highPriorityTaskList.add(taskMap.get(key));
-                    break;
-                case "medium":
-                    mediumPriorityTaskList.add(taskMap.get(key));
-                    break;
-                case "low":
-                    lowPriorityTaskList.add(taskMap.get(key));
-                    break;
-                default:
-                    break;
+            case "high":
+                highPriorityTaskList.add(taskMap.get(key));
+                break;
+            case "medium":
+                mediumPriorityTaskList.add(taskMap.get(key));
+                break;
+            case "low":
+                lowPriorityTaskList.add(taskMap.get(key));
+                break;
+            default:
+                break;
             }
+        }
+
+        if (highPriorityTaskList.size() == 0 && mediumPriorityTaskList.size() == 0 && lowPriorityTaskList.size() == 0) {
+            System.out.println("There are not tasks.");
+            return;
         }
 
         printTaskList(highPriorityTaskList, "high");
@@ -71,7 +77,8 @@ public class CommandStatus implements ICommand {
             System.out.println(String.format("%s %s priority tasks:", taskList.size(), priority));
             SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             for (Task t : taskList) {
-                System.out.println(String.format("  %s | %s | %s", t.getId(), parser.format(t.getDate()), t.getTitle()));
+                System.out
+                        .println(String.format("  %s | %s | %s", t.getId(), parser.format(t.getDate()), t.getTitle()));
             }
             System.out.println();
         }

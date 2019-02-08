@@ -1,8 +1,9 @@
-package main.com.stormlin.command;
+package com.stormlin.command;
 
 public interface ICommand {
 
     void usage();
+
     void execute(String[] args);
 
 }

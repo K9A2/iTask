@@ -1,9 +1,9 @@
-package main.com.stormlin.command;
+package com.stormlin.command;
 
-import main.com.stormlin.entity.Task;
-import main.com.stormlin.entity.TodoList;
-import main.com.stormlin.util.Const;
-import main.com.stormlin.util.Util;
+import com.stormlin.entity.Task;
+import com.stormlin.entity.TodoList;
+import com.stormlin.util.Const;
+import com.stormlin.util.Util;
 
 import java.util.HashMap;
 

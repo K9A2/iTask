@@ -1,9 +1,9 @@
-package main.com.stormlin.command;
+package com.stormlin.command;
 
-import main.com.stormlin.entity.Branch;
-import main.com.stormlin.entity.TodoList;
-import main.com.stormlin.util.Const;
-import main.com.stormlin.util.Util;
+import com.stormlin.entity.Branch;
+import com.stormlin.entity.TodoList;
+import com.stormlin.util.Const;
+import com.stormlin.util.Util;
 
 public class CommandAdd implements ICommand {
 

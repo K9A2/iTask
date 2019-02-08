@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <!-- Project affiliation -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.stormlin</groupId>
+  <artifactId>todo-java</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>todo-java</name>
+  <url>http://www.stormlin.com</url>
+  <!-- Project dependency -->
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <!-- Project packaging configuration -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  <build>
+    <finalName>todo-java</finalName>
+    <pluginManagement>
+      <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- Use "mvn clean" to clean auto-generated files -->
+        <!-- See http://maven.apache.org/plugins/maven-clean-plugin/ for details -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- Use this plugin to handle the copying of resources to output dictionary -->
+        <!-- See https://maven.apache.org/plugins/maven-resources-plugin/ for details -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <!-- Use this plugin to compile source files in maven context -->
+        <!-- See https://maven.apache.org/plugins/maven-compiler-plugin/ for details -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <!-- Use this plugin to handle the utit tests -->
+        <!-- See https://maven.apache.org/surefire/maven-surefire-plugin/ for details -->
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <!-- Use this plugin to generate jar file with command "mvn package" -->
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <mainClass>com.stormlin.Program</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
+        <!-- Use this plugin to add artifact(s) to the local repository -->
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <!-- Use this plugin to deploy the code -->
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- Use this plugin to generate a site for this project -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <!-- Use this plugin to generate reports abot the project -->
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
