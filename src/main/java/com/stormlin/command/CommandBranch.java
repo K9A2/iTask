@@ -5,19 +5,56 @@ import com.stormlin.entity.TodoList;
 import com.stormlin.util.Const;
 import com.stormlin.util.Util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class CommandBranch implements ICommand {
 
+    // All valid operations on branch
+    public static final ArrayList<String> validBranchOperation = new ArrayList<>(
+            Arrays.asList("add", "switch", "remove"));
+
+    /**
+     * This method prints the usage for command branch
+     */
     public void usage() {
-        System.out.println("Use this command to create, switch and delete branch.");
+        System.out.println("Use this command to create, print, switch and delete branch.\n");
+        System.out.println("usage: branch add branch-name");
+        System.out.println("   or: branch switch branch-id");
+        System.out.println("   or: branch remove branch-id");
+        System.out.println("   or: branch [-h|--help]");
+        System.out.println("   or: branch");
     }
 
+    /**
+     * This method executes the command concerning the branch
+     * 
+     * @param args The arguments from command line
+     */
     public void execute(String[] args) {
-        if (args.length > 3) {
-            System.out.println("Too many arguments for command: branch.");
+        if (!(args.length == 2 || args.length == 3)) {
+            System.out.println("Invlid number of arguments.\n");
+            usage();
+            return;
+        }
+        if (args.length == 2) {
+            if (Const.validInputOfHelp.contains(args[1])) {
+                // A valid requiest for help
+                usage();
+                return;
+            } else {
+                System.out.println(String.format("Invalid argument: %s.\n", args[1]));
+                usage();
+                return;
+            }
+        }
+
+        String operation = args[0];
+        if (!validBranchOperation.contains(operation)) {
+            System.out.println(String.format("Invlid branch operation: %s", operation));
             usage();
             return;
         }
@@ -33,7 +70,7 @@ public class CommandBranch implements ICommand {
             return;
         }
 
-        switch (args[1]) {
+        switch (operation) {
         case "add":
             addBranch(todoList, args);
             break;
@@ -46,9 +83,14 @@ public class CommandBranch implements ICommand {
         default:
             break;
         }
-
     }
 
+    /**
+     * Add a new branch in todo list
+     * 
+     * @param todoList Target todo list
+     * @param args     Arguments from command line
+     */
     private void addBranch(TodoList todoList, String[] args) {
         String key = Util.get8BitIdFromString(args[2]);
         if (todoList.getAllBranches().containsKey(key)) {
@@ -66,6 +108,12 @@ public class CommandBranch implements ICommand {
         Util.saveToListFile(todoList);
     }
 
+    /**
+     * Switch to branch specified by branch-id
+     * 
+     * @param todoList Target todo list
+     * @param args     Arguments from command line
+     */
     private void switchBranch(TodoList todoList, String[] args) {
         HashMap<String, Branch> branches = todoList.getAllBranches();
         String key = args[2];
@@ -77,6 +125,12 @@ public class CommandBranch implements ICommand {
         System.out.println(String.format("Switch to branch: %s", key));
     }
 
+    /**
+     * Remove the branch specified by branch-id
+     * 
+     * @param todoList Target todo list
+     * @param args     Arguments from command line
+     */
     private void removeBranch(TodoList todoList, String[] args) {
         String key = args[2];
         String currentBranchId = todoList.getCurrentBranch().getId();
@@ -102,6 +156,12 @@ public class CommandBranch implements ICommand {
         Util.saveToListFile(todoList);
     }
 
+    /**
+     * Print all branch in the terminal. Current branch will be marked by leading
+     * star.
+     * 
+     * @param todoList Target todo list
+     */
     private void printAllBranch(TodoList todoList) {
         HashMap<String, Branch> branches = todoList.getAllBranches();
         if (branches.size() == 0) {
