@@ -10,8 +10,6 @@ public class Const {
 
     public static final String DEFAULT_BRANCH_NAME = "default";
 
-    public static final ArrayList<String> validInputOfPriority = new ArrayList<>(
-            Arrays.asList("high", "medium", "low"));
     public static final ArrayList<String> validInputOfHelp = new ArrayList<>(Arrays.asList("-h", "--help"));
 
 }

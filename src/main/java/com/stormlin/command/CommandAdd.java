@@ -1,11 +1,17 @@
 package com.stormlin.command;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.stormlin.entity.Branch;
 import com.stormlin.entity.TodoList;
 import com.stormlin.util.Const;
 import com.stormlin.util.Util;
 
 public class CommandAdd implements ICommand {
+
+    public static final ArrayList<String> validInputOfPriority = new ArrayList<>(
+            Arrays.asList("high", "medium", "low"));
 
     /**
      * Use this method to print the usage of command add
@@ -44,7 +50,7 @@ public class CommandAdd implements ICommand {
         String title = args[1];
         String priority = args[2];
 
-        if (!Const.validInputOfPriority.contains(priority)) {
+        if (!validInputOfPriority.contains(priority)) {
             System.out.println(String.format("Illegal input of task priority: %s.\n", priority));
             usage();
             return;
