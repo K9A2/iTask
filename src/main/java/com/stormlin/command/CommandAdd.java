@@ -15,7 +15,7 @@ public class CommandAdd implements ICommand {
         System.out.println("This command takes exactly 2 arguments: <title> <priority>.");
         System.out.println("And there are only 3 legal options for task priority (high, medium and low).\n");
         System.out.println("usage: add task-title [high|medium|low]");
-        System.out.println("  or : add [-h|--help]");
+        System.out.println("   or: add [-h|--help]");
     }
 
     /**
