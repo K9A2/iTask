@@ -9,13 +9,25 @@ import java.io.File;
 public class CommandInit implements ICommand {
 
     public void usage() {
-        System.out.println("Command Init creates an empty list. Takes no argument.");
+        System.out.println("Command init initialize an empty list in the hidden folder .todo/.\n");
+        System.out.println("usage: init");
+        System.out.println("   or: init [-h|--help]");
     }
 
     public void execute(String[] args) {
         // This command takes no argument.
-        if (args.length > 1) {
-            System.out.println("Too many arguments for command: init");
+        if (!(args.length != 1 || args.length != 2)) {
+            System.out.println("Wrong number of arguments!\n");
+            usage();
+            return;
+        }
+        if (args.length == 2) {
+            if (Const.validInputOfHelp.contains(args[1])) {
+                // Print help message
+                usage();
+                return;
+            }
+            System.out.println(String.format("Wrong argument %s\n", args[1]));
             usage();
             return;
         }
