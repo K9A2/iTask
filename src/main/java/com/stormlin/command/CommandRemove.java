@@ -11,11 +11,19 @@ public class CommandRemove implements ICommand {
 
     public void usage() {
         System.out.println("Use this command to remove task specified by HEX ID.");
+        System.out.println("usage: remove <HEX-ID>");
+        System.out.println("   or: [-h|--help]");
     }
 
     public void execute(String[] args) {
         if (args.length != 2) {
+            System.out.println("Wrong number of arguments!");
             System.out.println();
+            usage();
+            return;
+        }
+
+        if (args[1].equals("-h") || args[1].equals("--help")) {
             usage();
             return;
         }
