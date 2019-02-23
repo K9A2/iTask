@@ -21,7 +21,7 @@ public class CommandBranch implements ICommand {
      * This method prints the usage for command branch
      */
     public void usage() {
-        System.out.println("Use this command to create, print, switch and delete branch.\n");
+        System.out.println("Use this command to create, print, switch and delete branch.");
         System.out.println("usage: branch add branch-name");
         System.out.println("   or: branch switch branch-id");
         System.out.println("   or: branch remove branch-id");
