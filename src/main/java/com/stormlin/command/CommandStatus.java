@@ -15,11 +15,17 @@ public class CommandStatus implements ICommand {
 
     public void usage() {
         System.out.println("Use command: status to print the status of current list.");
+        System.out.println("usage: status");
+        System.out.println("   or: status [-h|--help]");
     }
 
     public void execute(String[] args) {
-        if (args.length > 1) {
+        if (args.length > 2) {
             System.out.println("Too many arguments for command: status");
+            usage();
+            return;
+        }
+        if (args[1].equals("-h") || args[1].equals("--help")) {
             usage();
             return;
         }
