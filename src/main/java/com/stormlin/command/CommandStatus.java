@@ -25,7 +25,7 @@ public class CommandStatus implements ICommand {
             usage();
             return;
         }
-        if (args[1].equals("-h") || args[1].equals("--help")) {
+        if (args.length == 2 && (args[1].equals("-h") || args[1].equals("--help"))) {
             usage();
             return;
         }
